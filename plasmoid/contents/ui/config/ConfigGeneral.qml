@@ -17,8 +17,8 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
-import QtQuick.Controls 1.0
+import QtQuick 2.9
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 
@@ -78,11 +78,11 @@ Item {
         cfg_tempUnitChanged();
     }
 
-    ExclusiveGroup {
+    ButtonGroup {
         id: bgColorTypeGroup
     }
 
-    ExclusiveGroup {
+    ButtonGroup {
         id: tempUnitTypeGroup
     }
 
@@ -139,21 +139,21 @@ Item {
 
                 RadioButton {
                     id: standardBgColor
-                    exclusiveGroup: bgColorTypeGroup
+                    ButtonGroup.group: bgColorTypeGroup
                     text: i18n("Standard")
                     onCheckedChanged: if (checked) cfg_bgColor = 0;
                 }
 
                 RadioButton {
                     id: crystalBgColor
-                    exclusiveGroup: bgColorTypeGroup
+                    ButtonGroup.group: bgColorTypeGroup
                     text: i18n("Crystal")
                     onCheckedChanged: if (checked) cfg_bgColor = 1;
                 }
 
                 RadioButton {
                     id: translucentBgColor
-                    exclusiveGroup: bgColorTypeGroup
+                    ButtonGroup.group: bgColorTypeGroup
                     text: i18n("Translucent")
                     onCheckedChanged: if (checked) cfg_bgColor = 2;
                 }
@@ -201,14 +201,14 @@ Item {
 
                 RadioButton {
                     id: celsiusTemp
-                    exclusiveGroup: tempUnitTypeGroup
+                    ButtonGroup.group: tempUnitTypeGroup
                     text: i18n("Celsius °C")
                     onCheckedChanged: if (checked) cfg_tempUnit = 0;
                 }
 
                 RadioButton {
                     id: fahrenheitTemp
-                    exclusiveGroup: tempUnitTypeGroup
+                    ButtonGroup.group: tempUnitTypeGroup
                     text: i18n("Fahrenheit °F")
                     onCheckedChanged: if (checked) cfg_tempUnit = 1;
                 }
@@ -231,7 +231,7 @@ Item {
 
                 SpinBox {
                     id: cpuCritTempSpinBox
-                    maximumValue: 150
+                    to: 150
                 }
             }
         }
