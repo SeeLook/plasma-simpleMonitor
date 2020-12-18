@@ -17,11 +17,11 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick 2.9
+import QtQuick.Layouts 1.4
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import QtQuick.Controls 1.0
+import QtQuick.Controls 2.2
 
 import "../code/code.js" as Code
 
@@ -60,6 +60,7 @@ Rectangle {
         property int tempUnit:      plasmoid.configuration.tempUnit
         property int cpuHighTemp:   plasmoid.configuration.cpuHighTemp
         property int cpuCritTemp:   plasmoid.configuration.cpuCritTemp
+        property int cpuMaxVisible: plasmoid.configuration.cpuMaxVisible
 
         property string distroName: "tux"
         property string distroId: "tux"
@@ -196,10 +197,20 @@ Rectangle {
             // cpu load
             if (sourceName.match("^cpu/cpu\\d+/TotalLoad")) {
                 var cpuNumber = sourceName.split('/')[1].match(/\d+/);
+                if (confEngine.cpuMaxVisible)
+                    cpuNumber = Math.min(cpuNumber, confEngine.cpuMaxVisible - 1)
                 if (cpuModel.count <= cpuNumber)
-                    cpuModel.append({'val':data.value});
-                else
-                    cpuModel.set(cpuNumber,{'val':data.value});
+                    cpuModel.append({'val': data.value});
+                else {
+                    var cpuNr = parseInt(sourceName.replace("cpu/cpu", "").replace("/TotalLoad", ""))
+                    if (confEngine.cpuMaxVisible) {
+                        if (cpuNr < confEngine.cpuMaxVisible)
+                          cpuModel.set(cpuNumber, {'val': data.value});
+                        else
+                          cpuModel.remove(cpuModel.count - 1)
+                    } else
+                        cpuModel.set(cpuNumber, {'val': data.value});
+                }
                 return;
             }
 

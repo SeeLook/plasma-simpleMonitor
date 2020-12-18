@@ -75,5 +75,9 @@
             <label>CPU Critical Temp</label>
             <default>70</default>
         </entry>
+        <entry name="cpuMaxVisible" type="Int">
+          <label>Visible CPU cores</label>
+          <default>0</default>
+        </entry>
     </group>
 </kcfg>

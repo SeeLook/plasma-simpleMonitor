@@ -45,6 +45,7 @@ Item {
     property int cfg_tempUnit
     property alias cfg_cpuHighTemp: cpuHighTempSpinBox.value
     property alias cfg_cpuCritTemp: cpuCritTempSpinBox.value
+    property alias cfg_cpuMaxVisible: cpuMaxVisibleSpinBox.value
 
     QtObject {
         id: d
@@ -226,6 +227,16 @@ Item {
                 SpinBox {
                     id: cpuCritTempSpinBox
                     to: 150
+                }
+
+                Label {
+                    text: i18n("Visible CPU cores")
+                    Layout.alignment: Qt.AlignRight
+                }
+
+                SpinBox {
+                    id: cpuMaxVisibleSpinBox
+                    to: 128
                 }
             }
         }
