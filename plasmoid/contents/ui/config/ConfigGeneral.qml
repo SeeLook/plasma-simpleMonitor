@@ -19,7 +19,7 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.4
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 import "../../code/code.js" as Code
@@ -60,16 +60,16 @@ Item {
 
     onCfg_bgColorChanged: {
         switch (cfg_bgColor) {
-            default: case 0: bgColorTypeGroup.current = standardBgColor; break;
-            case 1: bgColorTypeGroup.current = crystalBgColor; break;
-            case 2: bgColorTypeGroup.current = translucentBgColor; break;
+            default: case 0: bgColorTypeGroup.checkedButton = standardBgColor; break;
+            case 1: bgColorTypeGroup.checkedButton = crystalBgColor; break;
+            case 2: bgColorTypeGroup.checkedButton = translucentBgColor; break;
         }
     }
 
     onCfg_tempUnitChanged: {
         switch (cfg_tempUnit) {
-            default: case 0: tempUnitTypeGroup.current = celsiusTemp; break;
-            case 1: tempUnitTypeGroup.current = fahrenheitTemp; break;
+            default: case 0: tempUnitTypeGroup.checkedButton = celsiusTemp; break;
+            case 1: tempUnitTypeGroup.checkedButton = fahrenheitTemp; break;
         }
     }
 
@@ -100,7 +100,6 @@ Item {
                 Label {
                     text: i18n("Logo:")
                     Layout.alignment: Qt.AlignRight
-                    anchors.verticalCenter: logoComboBox.verticalCenter
                 }
 
                 ComboBox {
@@ -111,7 +110,7 @@ Item {
                 Rectangle {
 
                     Layout.columnSpan: 2
-                    anchors.horizontalCenter: logoComboBox.horizontalCenter
+                    Layout.alignment: Qt.AlignHCenter
 
                     implicitHeight: logoImage.height + 10
                     implicitWidth:  logoImage.width + 10
@@ -134,7 +133,6 @@ Item {
                     text: i18n("Background color:")
                     Layout.alignment: Qt.AlignRight
                     Layout.rowSpan: 3
-                    anchors.verticalCenter: standardBgColor.verticalCenter
                 }
 
                 RadioButton {
@@ -162,7 +160,6 @@ Item {
                     text: i18n("Show:")
                     Layout.alignment: Qt.AlignRight
                     Layout.rowSpan: 2
-                    anchors.verticalCenter: showSwapCheckBox.verticalCenter
                 }
 
                 CheckBox {
@@ -196,7 +193,6 @@ Item {
                     text: i18n("Temperature units:")
                     Layout.alignment: Qt.AlignRight
                     Layout.rowSpan: 2
-                    anchors.verticalCenter: celsiusTemp.verticalCenter
                 }
 
                 RadioButton {
@@ -216,7 +212,6 @@ Item {
                 Label {
                     text: i18n("CPU High Temperature:")
                     Layout.alignment: Qt.AlignRight
-                    anchors.verticalCenter: cpuHighTempSpinBox.verticalCenter
                 }
 
                 SpinBox {
@@ -226,7 +221,6 @@ Item {
                 Label {
                     text: i18n("CPU Critical Temperature:")
                     Layout.alignment: Qt.AlignRight
-                    anchors.verticalCenter: cpuCritTempSpinBox.verticalCenter
                 }
 
                 SpinBox {
